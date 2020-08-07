@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { addTitular, addReplacement } from '../actions'
 
 const Players = ({players, addTitular, addReplacement}) =>(
     <section>
@@ -26,22 +27,22 @@ const mapStateToProps = state =>({
     players: state.players
 })
 
-const mapDispatchToProps = dispatch =>({
-    addTitular(player){
-        dispatch({
-            type: 'ADD_TITULAR',
-            player
-        })
-    },
-    addReplacement(player){
-        dispatch({
-            type: 'ADD_REPLACEMENT',
-            player
-        })
-    }
-})
+// const mapDispatchToProps = dispatch =>({
+//     addTitular(player){
+//         dispatch({
+//             type: 'ADD_TITULAR',
+//             player
+//         })
+//     },
+//     addReplacement(player){
+//         dispatch({
+//             type: 'ADD_REPLACEMENT',
+//             player
+//         })
+//     }
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Players);
+export default connect(mapStateToProps, {addTitular, addReplacement})(Players);
 
 // la función conect recibe dos funciones, la
 // primera es una función que mapea lo que hay en el estado y lo convierte en propiedades

@@ -36,35 +36,65 @@ const initialState = {
 }
 
 const reducerManager = (state = initialState, action) =>{
-    if(action.type === 'ADD_TITULAR'){
-        return {
-            ...state,
-            titulars: state.titulars.concat(action.player),
-            players: state.players.filter( j => j.id !== action.player.id)
-        }
+    switch (action.type){
+        case 'ADD_TITULAR' :
+            return {
+                ...state,
+                // titulars: state.titulars.concat(action.player),
+                titulars: [...state.titulars, action.payload],
+                players: state.players.filter( j => j.id !== action.payload.id)
+            }
+        case 'ADD_REPLACEMENT' :
+            return {
+                ...state,
+                replacements: state.replacements.concat(action.payload),
+                players: state.players.filter( j => j.id !== action.payload.id)
+            }
+        case 'REMOVE_TITULAR' :
+            return {
+                ...state,
+                titulars: state.titulars.filter( j => j.id !== action.payload.id),
+                players: state.players.concat(action.payload)
+            } 
+        case 'REMOVE_REPLACEMENT' :
+            return {
+                ...state,
+                replacements: state.replacements.filter( j => j.id !== action.payload.id),
+                players: state.players.concat(action.payload)
+            }
+        default : 
+            return state    
     }
-    if( action.type === 'ADD_REPLACEMENT' ){
-        return {
-            ...state,
-            replacements: state.replacements.concat(action.player),
-            players: state.players.filter( j => j.id !== action.player.id)
-        }
-    }
-    if( action.type === 'REMOVE_TITULAR' ){
-        return {
-            ...state,
-            titulars: state.titulars.filter( j => j.id !== action.player.id),
-            players: state.players.concat(action.player)
-        }
-    }
-    if( action.type === 'REMOVE_REPLACEMENT' ){
-        return {
-            ...state,
-            replacements: state.replacements.filter( j => j.id !== action.player.id),
-            players: state.players.concat(action.player)
-        }
-    }
-    return state
+
+    // if(action.type === 'ADD_TITULAR'){
+    //     return {
+    //         ...state,
+    //         titulars: state.titulars.concat(action.player),
+    //         players: state.players.filter( j => j.id !== action.player.id)
+    //     }
+    // }
+    // if( action.type === 'ADD_REPLACEMENT' ){
+    //     return {
+    //         ...state,
+    //         replacements: state.replacements.concat(action.player),
+    //         players: state.players.filter( j => j.id !== action.player.id)
+    //     }
+    // }
+    // if( action.type === 'REMOVE_TITULAR' ){
+    //     return {
+    //         ...state,
+    //         titulars: state.titulars.filter( j => j.id !== action.player.id),
+    //         players: state.players.concat(action.player)
+    //     }
+    // }
+    // if( action.type === 'REMOVE_REPLACEMENT' ){
+    //     return {
+    //         ...state,
+    //         replacements: state.replacements.filter( j => j.id !== action.player.id),
+    //         players: state.players.concat(action.player)
+    //     }
+    // }
+    // return state
 }
 
 
